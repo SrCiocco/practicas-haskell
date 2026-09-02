@@ -29,9 +29,10 @@ siempre tiene solución).
 ′23. roots : Dados los coeficientes de una ecuación de segundo grado, devolver sus raices (suponer que la
 ecuación siempre tiene solución real).
 24. app: Dada una función de enteros en enteros y un número entero, devuelve la función aplicada al elemento
+25. appEither : Dadas dos funciones f y g de enteros en enteros y dos números enteros, aplique f al segundo
+número si el primero es mayor o igual a 0, o g en el caso contrario.
 -}
 
--- 1)
 cincoInt :: Int -> Int
 cincoInt x = 5
 
@@ -140,3 +141,9 @@ roots' (a, b, c) = ((-b + sqrt (b ^ 2 - 4 * a * c)) / (2 * a), (-b - sqrt (b ^ 2
 -- 24)
 app :: (Int -> Int, Int) -> Int
 app (f, x) = f x
+
+-- 25)
+appEither :: (Int -> Int) -> (Int -> Int) -> Int -> Int -> Int
+appEither f g n1 n2
+    | n1 >= 0 = f n2
+    | otherwise = g n2
