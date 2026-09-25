@@ -35,3 +35,25 @@
 22. masDe: Dada una lista de listas xss y un número n, devuelve la lista de aquellas listas de xss con longitud mayor
 	que n
 -}
+
+-- 1)
+head' :: [a] -> a
+head' (x:_) = x
+
+-- 2)
+tail' :: [a] -> [a]
+tail' (_:xs) = xs
+
+-- 3)
+last' :: [a] -> a
+last' [x] = x
+last' (_:xs) = last' xs
+
+-- 4)
+cons' :: [a] -> a -> [a]
+cons' x xs = xs:x
+
+-- 5)
+snoc' :: [a] -> a -> [a]
+snoc' [] x = [x]
+snoc' (x:xs) y = x:snoc' xs y
