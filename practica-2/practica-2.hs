@@ -57,3 +57,35 @@ cons' x xs = xs:x
 snoc' :: [a] -> a -> [a]
 snoc' [] x = [x]
 snoc' (x:xs) y = x:snoc' xs y
+
+-- 6)
+conssnoc :: [a] -> a -> [a]
+conssnoc xs x = cons' (snoc' xs x) x
+
+-- 7)
+take' :: Int -> [Int] -> [Int]
+take' n _ | n <= 0 = []
+take' _ [] = []
+take' n (x:xs) = x:take' (n - 1) xs
+
+-- 8)
+drop' :: Int -> [Int] -> [Int]
+drop' n xs | n <= 0 = xs
+drop' _ [] = []
+drop' n (x:xs) = drop' (n - 1) xs
+
+-- 9)
+replicate' :: Int -> a -> [a]
+replicate' n x | n <= 0 = []
+replicate' n x = x:replicate' (n - 1) x
+
+-- 10)
+-- a)
+reversea :: [a] -> [a]
+reversea [] = []
+reversea (x:xs) = reversea xs ++ [x]
+
+-- b)
+reverseb :: [a] -> [a]
+reverseb [] = []
+reverseb (x:xs) = snoc' (reverseb xs) x
