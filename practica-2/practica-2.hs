@@ -89,3 +89,85 @@ reversea (x:xs) = reversea xs ++ [x]
 reverseb :: [a] -> [a]
 reverseb [] = []
 reverseb (x:xs) = snoc' (reverseb xs) x
+
+-- 11)
+ayuda :: [a] -> [a] -> [a]
+ayuda xs [] = xs
+ayuda [] ys = ys
+ayuda (x:xs) ys = x : (ayuda xs ys)
+
+-- 12)
+insertNth :: Integer -> a -> [a] -> [a]
+insertNth _ _ [] = []
+insertNth 0 a xs = a:xs
+insertNth n a (x:xs)
+    | n > 0 = x : insertNth (n - 1) a xs
+    | otherwise = []
+
+-- 13)
+sum' :: [Integer] -> Integer
+sum' [] = 0
+sum' (x:xs) = x + sum' xs
+
+-- 14)
+prod' :: [Integer] -> Integer
+prod' [] = 1
+prod' (x:xs) = x * prod' xs
+
+-- 15)
+filterOdd' :: [Integer] -> [Integer]
+filterOdd' [] = []
+filterOdd' (x:xs)
+    | mod x 2 /= 0 = x : filterOdd' xs
+    | otherwise = filterOdd' xs
+
+-- 16)
+filterEven' :: [Integer] -> [Integer]
+filterEven' [] = []
+filterEven' (x:xs)
+    | mod x 2 == 0 = x : filterEven' xs
+    | otherwise = filterEven' xs
+
+-- 17)
+zip' :: [a] -> [b] -> [(a, b)]
+zip' [] [] = []
+zip' (x:xs) (y:ys) = (x, y) : zip' xs ys
+
+-- 18)
+singleton' :: a -> [a]
+singleton' a = [a]
+
+-- 19)
+or' :: [Bool] -> Bool
+or' [] = False
+or' (x:xs)
+    | x = True
+    | otherwise = or' xs
+
+and' :: [Bool] -> Bool
+and' [] = True
+and' (x:xs)
+    | x = and' xs
+    | otherwise = False
+
+-- 21)
+-- a)
+longitudesa :: [[a]] -> [Int]
+longitudesa [] = []
+longitudesa (x:xs) = length x : longitudesa xs
+
+-- b)
+length' :: [a] -> Integer
+length' [] = 0
+length' (x:xs) = 1 + length' xs
+
+longitudesb :: [[a]] -> [Integer]
+longitudesb [] = []
+longitudesb (x:xs) = length' x : longitudesb xs
+
+-- 22)
+masDe :: [[a]] -> Integer -> [[a]]
+masDe [] _ = []
+masDe (x:xss) n
+    | length' x > n = x : masDe xss n
+    | otherwise = masDe xss n
