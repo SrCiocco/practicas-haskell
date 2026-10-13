@@ -67,12 +67,20 @@
       g :: a -> b -> c
    y sea h definida como:
       h x y = f (g x y)
-   Determinar el tipo de h e indicar cuáles de las siguientes definiciones 
-   de h son equivalentes a la dada:
+   Determinar el tipo de h e indicar cuáles de las siguientes definiciones de h son equivalentes a la dada:
       - h = f . g
       - h x = f . (g x)
       - h x y = (f . g) x y
    ¿Cuál es el tipo de la función (.)?
+
+   7. Definir usando funciones de alto orden (map, filter, foldr).
+a) filterEven’ :: [Int] → [Int], que dada una lista de enteros, devuelve una lista donde los unicos elementos son los numeros pares de la lista de entrada.
+b) and’ :: [Bool] → Bool, que dado una lista de valores Booleanos devuelve True si todos los elemento de la lista son True, y False en caso contrario.
+c) longitudes :: [[a]] → [Int], que dada una lista de listas devuelve una lista de las longitudes de cada lista. Ejemplo: longitudes [[1,2,3], [4,5], []] = [3,2,0]
+d) unzip :: [(a, b)] → ([a], [b]), que dada una lista de tuplas xs retorna una tupla de listas donde cada una corresponde a los primeros y segundos elementos de los pares respectivamente. Ej. unzip [(′𝑎′, 1), (′𝑧′, 7), (′ℎ′, 9)] = (”𝑎𝑧ℎ”, [1, 7, 9])
+e) pair2List :: (a, [b]) → [(a, b)] que dado un par formado por un valor 𝑥 y una lista 𝑥𝑠 convierta a la lista xs en una lista de pares, formada con los elementos de 𝑥𝑠 y 𝑥. Ejemplo: pair2List (𝑥, [𝑦1, 𝑦2, 𝑦3]) = [(𝑥, 𝑦1), (𝑥, 𝑦2), (𝑥, 𝑦3)]
+f) maxSec :: [(Int, Int)] → (Int, Int), que dada una lista de pares de naturales que represente a una lista de segmentos de la recta, calcule el segmento mas largo de la misma. Ejemplo: maxSec [(1, 2), (0, 7), (4, 6)] = (0, 7) Puede definir una funcion auxiliar maxL :: (Int, Int) → (Int, Int) → (Int, Int), que dados dos pares de naturales que representan a dos segmentos de la recta, devuelva el segmento cuya longitud sea maxima. Ejemplo maxL (1, 2) (0, 7) = (0, 7)
+
 -}
 
 -- 1)
@@ -146,3 +154,39 @@ expandir (x:xs) = replicate x x ++ expandir xs
 -- 3)
 scalarProduct :: [Int] -> [Int] -> Int
 scalarProduct xs ys = sum [x * y | (x,y) <- zip xs ys]
+
+-- 5)
+-- a)
+fa :: a -> a
+fa x = x
+
+-- b)
+greater :: (Int, Int) -> Bool
+greater (x, y)
+    | x > y = True
+    | otherwise = False
+
+-- c)
+fc :: (Int, Int) -> Int
+fc (x, y) = x
+
+-- 7)
+-- a)
+filterEven' :: [Int] -> [Int]
+filterEven' xs = filter even xs
+
+-- b)
+and' :: [Bool] -> Bool
+and' xs = foldr (&&) True xs
+
+-- c)
+longitudes :: [[a]] -> [Int]
+longitudes xss = map length xss
+
+-- d)
+unzip' :: [(a, b)] -> ([a], [b])
+unzip' xss = (map fst xss, map snd xss)
+
+-- e)
+pair2List :: (a, [b]) -> [(a, b)]
+pair2List (x, xs) = map (\y -> (x, y)) xs
